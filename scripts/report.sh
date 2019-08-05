@@ -11,7 +11,7 @@ cat "${DIR}cover.tex" \
   | xelatex > /dev/null && mv texput.pdf .report-cover.pdf
 
 # create a pdf file for the thanks page
-pandoc -S \
+pandoc \
   -V fontsize=12pt \
   -V geometry:left=4cm,right=4cm,top=8cm,bottom=.5cm \
   "${DIR}remerciements.md" -o .report-thx.pdf
@@ -24,7 +24,7 @@ done
 # generate a pdf file with the content
 echo "${CONTENT}\n\n\listoffigures\n" \
   | sed 's/\.\.\/images\//\.\/images\//g' \
-  | pandoc -S --toc -o .report-content.pdf \
+  | pandoc --toc -o .report-content.pdf \
     -V lang=fr -V fontsize=12pt -V documentclass=report
 
 # merge all needed pdf files
